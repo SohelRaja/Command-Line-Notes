@@ -45,7 +45,12 @@ var getAll = () => {
     console.log('Listing all notes');
 };
 var getNote = (title) => {
-    console.log('Reading note',title);
+    var notes = fetchNotes();
+    var filteredNotes = notes.filter((note) => {
+        return (note.title === title);
+    });
+    //console.log(filteredNotes[0]);
+    return filteredNotes[0];
 };
 var removeNote = (title) => {
     var notes = fetchNotes();

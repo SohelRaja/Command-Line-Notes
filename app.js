@@ -1,4 +1,4 @@
-console.log('App started');
+//console.log('App started');
 
 const fs = require('fs'); //Requiring file system module
 const os = require('os');
@@ -10,32 +10,40 @@ const notes = require('./notes.js');
 var argv = yargs.argv;
 var command = argv._[0];
 
-console.log("Command: ", command);
-console.log("Yargs: ", argv);
-
 if(command === 'add'){
     var note = notes.addNote(argv.title,argv.body);
     if(note){
         console.log('------------');
         console.log('Note Created');
         console.log('------------');
-        console.log(`Title: ${note.title}`);
-        console.log(`Body: ${note.body}`);
+        notes.logNote(note);
     }else{
         console.log('------------------------');
         console.log('Note title already taken');
         console.log('------------------------');
     }
 }else if(command === 'list'){
-    notes.getAll();
+    var allNotes = notes.getAll();
+    noOfNotes = allNotes.length;
+    if(noOfNotes === 0){
+        console.log('-------------------------');
+        console.log(`There is no note present.`);
+        console.log('-------------------------');
+    }else{
+        console.log('----------------------------');
+        console.log(`Printing : ${noOfNotes} note(s) below.`);
+        console.log('----------------------------');
+        allNotes.forEach((note) => {
+            notes.logNote(note);
+        });
+    }
 }else if(command === 'read'){
     var note = notes.getNote(argv.title);
     if(note){
         console.log('----------');
         console.log('Note Found');
         console.log('----------');
-        console.log(`Title: ${note.title}`);
-        console.log(`Body: ${note.body}`);
+        notes.logNote(note);
     }else{
         console.log('---------------');
         console.log('Note not found.');

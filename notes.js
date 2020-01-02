@@ -1,4 +1,4 @@
-console.log('Notes App started');
+//console.log('Notes App started');
 
 const fs = require('fs');
 
@@ -42,7 +42,7 @@ var addNote = (title, body) => {
     }
 };
 var getAll = () => {
-    console.log('Listing all notes');
+    return fetchNotes();
 };
 var getNote = (title) => {
     var notes = fetchNotes();
@@ -64,9 +64,16 @@ var removeNote = (title) => {
     return (notes.length !== filteredNotes.length);
 };
 
+var logNote = (note) => {
+    console.log(`Title: ${note.title}`);
+    console.log(`Body: ${note.body}`);
+    console.log('----------');
+};
+
 module.exports = {
     addNote: addNote, 
     getAll: getAll,
     getNote: getNote,
-    removeNote: removeNote
+    removeNote: removeNote,
+    logNote: logNote
 };

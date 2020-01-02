@@ -2,22 +2,32 @@ console.log('Notes App started');
 
 const fs = require('fs');
 
+var fetchNotes = () => {
+    try{
+        //Reading the previous value of the json file
+        var notesString = fs.readFileSync('notes-data.json');
+        //converting string to json object
+        return JSON.parse(notesString);
+    }catch(e){
+        return [];
+    }
+};
+
+var saveNotes = (notes) => {
+    //Converting json object to string
+    stringValue = JSON.stringify(notes);
+
+    //Saving the string value into a file
+    fs.writeFileSync('notes-data.json',stringValue);
+};
+
 var addNote = (title, body) => {
-    var notes = [];
+    var notes = fetchNotes();
     var note = {
         title: title,
         body: body
     };
     
-    try{
-        //Reading the previous value of the json file
-        var notesString = fs.readFileSync('notes-data.json');
-        //converting string to json object
-        notes = JSON.parse(notesString);
-    }catch(e){
-
-    }
-
     //For finding the unique title of a note
     duplicateNotes = notes.filter((note) => {
         return (note.title === title);
@@ -25,12 +35,10 @@ var addNote = (title, body) => {
     if(duplicateNotes.length === 0){
         //Pushing the note object to the notes array
         notes.push(note);
-
-        //Converting json object to string
-        stringValue = JSON.stringify(notes);
-
-        //Saving the string value into a file
-        fs.writeFileSync('notes-data.json',stringValue);
+        //Saving the notes
+        saveNotes(notes);
+        //Returning the Created note
+        return note;
     }
 };
 var getAll = () => {

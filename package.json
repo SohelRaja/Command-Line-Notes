@@ -1,0 +1,23 @@
+{
+  "name": "command-line-notes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "serve": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SohelRaja/Command-Line-Notes.git"
+  },
+  "author": "Sohel Raja",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SohelRaja/Command-Line-Notes/issues"
+  },
+  "homepage": "https://github.com/SohelRaja/Command-Line-Notes#readme",
+  "dependencies": {
+    "lodash": "^4.17.15",
+    "yargs": "^15.1.0"
+  }
+}

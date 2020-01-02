@@ -7,7 +7,37 @@ const yargs = require('yargs');
 
 const notes = require('./notes.js');
 
-var argv = yargs.argv;
+var argv = yargs
+    .command('add','Add a new note.',{
+        title: {
+            describe: 'Title of the note.',
+            demand: true,
+            alias: 't'
+        },
+        body: {
+            describe: 'Body of the note.',
+            demand: true,
+            alias: 'b'
+        }
+    })
+    .command('list','List all the notes.')
+    .command('read','Read a note.',{
+        title: {
+            describe: 'Title of the note.',
+            demand: true,
+            alias: 't'
+        }
+    })
+    .command('remove','Remove a note.'{
+        title: {
+            describe: 'Title of the note.',
+            demand: true,
+            alias: 't'
+        }
+    })
+    .help()
+    .argv;
+
 var command = argv._[0];
 
 if(command === 'add'){

@@ -17,7 +17,7 @@ const bodySchema = {
     demand: true,
     alias: 'b'
 };
-var argv = yargs
+var args = yargs
     .command('add','Add a new note.',{
         title: titleSchema,
         body: bodySchema
@@ -32,10 +32,10 @@ var argv = yargs
     .help()
     .argv;
 
-var command = argv._[0];
+var command = args._[0];
 
 if(command === 'add'){
-    var note = notes.addNote(argv.title,argv.body);
+    var note = notes.addNote(args.title,args.body);
     if(note){
         console.log('------------');
         console.log('Note Created');
@@ -62,7 +62,7 @@ if(command === 'add'){
         });
     }
 }else if(command === 'read'){
-    var note = notes.getNote(argv.title);
+    var note = notes.getNote(args.title);
     if(note){
         console.log('----------');
         console.log('Note Found:');
@@ -74,7 +74,7 @@ if(command === 'add'){
         console.log('---------------');
     }
 }else if(command === 'remove'){
-    var noteRemoved = notes.removeNote(argv.title);
+    var noteRemoved = notes.removeNote(args.title);
     var message = noteRemoved ? 'Note was removed.' : 'Unable to find the note.';
     console.log('------------------------');
     console.log(message);
